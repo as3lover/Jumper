@@ -35,7 +35,7 @@ public class Assets
 
     private function onComplete():void
     {
-        addChild(new Image(_asset.getTexture("background")));
+        //addChild(new Image(_asset.getTexture("background")));
     }
 }
 }
