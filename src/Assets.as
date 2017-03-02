@@ -4,18 +4,19 @@
 package
 {
 import flash.system.System;
-
-import starling.display.Image;
-
+import starling.events.Event;
+import starling.textures.Texture;
 import starling.utils.AssetManager;
+import starling.events.EventDispatcher;
 
-public class Assets
+public class Assets extends EventDispatcher
 {
     private var _asset:AssetManager;
 
     public function Assets()
     {
         _asset = new AssetManager();
+        //_asset.scaleFactor = 10;
         _asset.enqueue(EmpeddedAssets);
 
         _asset.loadQueue(function(ratio:Number):void
@@ -27,15 +28,15 @@ public class Assets
                 System.pauseForGCIfCollectionImminent(0);
                 System.gc();
 
-                onComplete();
+                dispatchEventWith(Event.COMPLETE);
             }
         });
 
     }
 
-    private function onComplete():void
+    public function getTexture(name:String):Texture
     {
-        //addChild(new Image(_asset.getTexture("background")));
+        return _asset.getTexture(name);
     }
 }
 }

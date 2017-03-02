@@ -3,11 +3,14 @@
  */
 package
 {
+import starling.display.Image;
 import starling.display.Sprite;
+import starling.events.Event;
 
 public class Game extends Sprite
 {
     public static var assets:Assets;
+    private var _background:Image;
     public function Game()
     {
 
@@ -15,7 +18,14 @@ public class Game extends Sprite
 
     public function start():void
     {
-        
+        assets = new Assets();
+        assets.addEventListener(Event.COMPLETE, onComplete);
+    }
+
+    private function onComplete(event:Event):void
+    {
+        _background = new Image(assets.getTexture("background"));
+        addChild(_background);
     }
 }
 }
