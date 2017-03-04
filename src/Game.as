@@ -18,6 +18,7 @@ public class Game extends Sprite
     public static var assets:Assets;
     private var _background:Image;
     private var _gameArea:GameArea;
+    private var touchTest:TouchTest;
     public function Game()
     {
 
@@ -32,12 +33,15 @@ public class Game extends Sprite
     private function onComplete(event:Event):void
     {
         _background = new Image(assets.getTexture("background"));
-        //addChild(_background);
+        addChild(_background);
 
         _gameArea = new GameArea();
         addChild(_gameArea);
 
-        setTimeout(aaa,1000)
+        //touchTest = new TouchTest(_background);
+        //addChild(touchTest);
+
+        setTimeout(aaa,300)
         function aaa(){addEventListener(Event.ENTER_FRAME, advanceTime);}
     }
 

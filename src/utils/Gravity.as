@@ -9,6 +9,8 @@ public class Gravity
 {
     private static var _objects:Array = new Array();
     private static var _length:int = 0 ;
+    private static var _obj:Object;
+
 
     public function Gravity(){}
 
@@ -23,20 +25,23 @@ public class Gravity
         var movement:Number;
         for(var i:int = 0; i<_length; i++)
         {
-            if(_objects[i].moving)
+            _obj = _objects[i];
+            if(!_obj.chaned)
             {
-                _objects[i].speedY += Config.ACCEL * _objects[i].density * time;
-                movement = time * _objects[i].speedY;
+                _obj.speedY += Config.ACCEL * _obj.density * time;
+                movement = time * _obj.speedY;
                 if (movement < 0)
-                    _objects[i].direction = Config.UPWARD;
+                    _obj.direction = Config.UPWARD;
                 else if (movement == 0)
-                    _objects[i].direction = Config.FIXED;
+                    _obj.direction = Config.FIXED;
                 else
-                    _objects[i].direction = Config.DOWNWARD;
+                    _obj.direction = Config.DOWNWARD;
 
-                _objects[i].y += movement;
-                _objects[i].x += _objects[i].speedX * time;
+                _obj.y += movement;
             }
+
+            if()
+            _obj.x += _obj.speedX * time;
         }
     }
 }

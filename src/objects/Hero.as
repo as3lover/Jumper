@@ -17,6 +17,7 @@ public class Hero extends Sprite
     private var _moving:Boolean;
     private var _density:Number;
     private var _chain:Object;
+    private var _chained:Boolean;
 
 
     public function Hero()
@@ -97,20 +98,40 @@ public class Hero extends Sprite
         if(moving)
             return;
 
-        speedY = - Config.HERO_Y_SPEED
+        speedY = - Config.HERO_Y_SPEED;
 
         switch(direction)
         {
-            case Config.UP_RIGHT:
+            case Config.RIGHT_UP:
                 speedX = Config.HERO_X_SPEED;
                 break;
 
-            case Config.UP_LEFT:
-                speedX = -Config.HERO_X_SPEED
+            case Config.LEFT_UP:
+                speedX = -Config.HERO_X_SPEED;
                 break
 
             case Config.UP:
                 speedX = 0;
+                break
+
+            case Config.LEFT:
+                speedX = - Config.HERO_X_SPEED;
+                speedY = - Config.HERO_Y_SPEED/2;
+                break
+
+            case Config.RIGHT:
+                speedX = + Config.HERO_X_SPEED;
+                speedY = - Config.HERO_Y_SPEED/2;
+                break
+
+            case Config.TO_LEFT:
+                speedX = - Config.HERO_X_SPEED/10;
+                speedY = 0;
+                break
+
+            case Config.TO_RIGTH:
+                speedX = - Config.HERO_X_SPEED/10;
+                speedY = 0;
                 break
         }
 
@@ -126,6 +147,20 @@ public class Hero extends Sprite
     public function set speedX(value:Number):void
     {
         _speedX = value;
+    }
+
+    public function get chained():Boolean
+    {
+        return _chained;
+    }
+
+    public function set chained(value:Boolean):void
+    {
+        _chained = value;
+        if(chained)
+        {
+
+        }
     }
 }
 }

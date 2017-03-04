@@ -34,21 +34,21 @@ public class GameArea extends Sprite
 
     private function onAdd(event:Event):void
     {
-        removeEventListener(Event.ADDED_TO_STAGE, onAdd)
+        removeEventListener(Event.ADDED_TO_STAGE, onAdd);
         stage.addEventListener(KeyboardEvent.KEY_DOWN, key);
     }
 
     private function key(e:KeyboardEvent):void
     {
-        trace(e.keyCode)
+        trace(e.keyCode);
         switch(e.keyCode)
         {
             case 39:
-                _hero.move(Config.UP_RIGHT);
+                _hero.move(Config.RIGHT_UP);
                 break;
 
             case 37:
-                _hero.move(Config.UP_LEFT)
+                _hero.move(Config.LEFT_UP)
                 break;
 
             case 38:
@@ -56,8 +56,6 @@ public class GameArea extends Sprite
                 break;
         }
     }
-
-
 
     public function advanceTime(time:Number):void
     {

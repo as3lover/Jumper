@@ -25,8 +25,11 @@ public class Config
     public static const RIGHT:int = 0 ;
     public static const LEFT:int = 1 ;
     public static const UP:int = 2 ;
-    public static const UP_RIGHT:int = 3;
-    public static const UP_LEFT:int = 4;
+    public static const RIGHT_UP:int = 3;
+    public static const LEFT_UP:int = 4;
+    public static const TO_RIGTH:int = 4;
+    public static const TO_LEFT:int = 4;
+
 
     public static const ACCEL:Number = 1000;
     public static const HERO_Y_SPEED:Number = 600;
