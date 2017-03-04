@@ -13,7 +13,6 @@ public class Config
     public static const PLANE_HEIGTH:Number = 30;
     public static const PLANE_NUMBER:int = 4;
 
-    public static const ACCEL:Number = 700;
     public static const UPWARD:int = 1;
     public static const DOWNWARD:int = -1;
     public static const FIXED:int = 0;
@@ -28,5 +27,9 @@ public class Config
     public static const UP:int = 2 ;
     public static const UP_RIGHT:int = 3;
     public static const UP_LEFT:int = 4;
+
+    public static const ACCEL:Number = 1000;
+    public static const HERO_Y_SPEED:Number = 600;
+    public static const HERO_X_SPEED:Number = 150;
 }
 }

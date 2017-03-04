@@ -1,0 +1,9 @@
+Templates:				Alt + Ctrl + T
+Getter/Setter/Override/EventHandler:	Alt + Insert
+Refactor:				Shift + F6
+Comment/ Uncomment Line:		Ctrl + Slash
+Comment/ Uncomment Block:		Ctrl + Shift + Slash
+Last Edit Location:			Ctrl+Shift+Backspace 
+
+
+Ctrl + Click == Ctrl + Alt + B

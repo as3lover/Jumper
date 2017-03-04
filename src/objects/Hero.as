@@ -95,23 +95,22 @@ public class Hero extends Sprite
     public function move(direction:int):void
     {
         if(moving)
-                return;
+            return;
 
-        speedY = -450
+        speedY = - Config.HERO_Y_SPEED
 
         switch(direction)
         {
             case Config.UP_RIGHT:
-                speedX = 150;
+                speedX = Config.HERO_X_SPEED;
                 break;
 
             case Config.UP_LEFT:
-                speedX = -150
+                speedX = -Config.HERO_X_SPEED
                 break
 
             case Config.UP:
                 speedX = 0;
-                speedY = -500
                 break
         }
 

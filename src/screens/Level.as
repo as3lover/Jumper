@@ -33,11 +33,14 @@ public class Level extends Sprite
 
             if(random > .5)
                     addTween(_plane,random);
+            else
+                    _plane.visible = false;
         }
     }
 
     private function addTween(plane:Plane, random:Number):void
     {
+        return
         var x:int = plane.x;
         if(random > .75)
             x +=  plane.width;
@@ -57,12 +60,19 @@ public class Level extends Sprite
 
         for (var i:int = 0; i<Config.PLANE_NUMBER; i++)
         {
+            _plane = _planes[i];
+            if(!_plane.visible)
+                    continue;
+
             var rect1:Rectangle = object.getBounds(stage);
-            var rect2:Rectangle = _planes[i].getBounds(stage);
+            var rect2:Rectangle = _plane.getBounds(stage);
 
             var collide:Boolean = rect1.intersects(rect2);
 
-            if(collide && rect1.y + rect1.height <= rect2.y + rect2.height/3)
+            if(collide
+                    && rect1.y + rect1.height <= rect2.y + rect2.height/2
+                    && rect1.x + rect1.width/2 <= rect2.x + rect2.width
+                    && rect1.x + rect1.width/2 >= rect2.x )
             {
                 var p:Point = Pool.getPoint(0 , rect2.y);
                 var y:int = object.globalToLocal(p).y;
