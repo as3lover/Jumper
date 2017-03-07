@@ -11,14 +11,12 @@ import starling.display.Image;
 import starling.display.Sprite;
 import starling.events.Event;
 
-import utils.Gravity;
 
 public class Game extends Sprite
 {
     public static var assets:Assets;
     private var _background:Image;
     private var _gameArea:GameArea;
-    private var touchTest:TouchTest;
     public function Game()
     {
 
@@ -38,16 +36,12 @@ public class Game extends Sprite
         _gameArea = new GameArea();
         addChild(_gameArea);
 
-        //touchTest = new TouchTest(_background);
-        //addChild(touchTest);
-
-        setTimeout(aaa,300)
-        function aaa(){addEventListener(Event.ENTER_FRAME, advanceTime);}
+        setTimeout(startGame,300)
+        function startGame(){addEventListener(Event.ENTER_FRAME, advanceTime);}
     }
 
     private function advanceTime(event:Event, passedTime:Number):void
     {
-        Gravity.calculate(passedTime);
         _gameArea.advanceTime(passedTime);
     }
 }

@@ -14,11 +14,15 @@ public class Hero extends Sprite
     private var _speedX:Number;
     private var _speedY:Number;
     private var _direction:int;
-    private var _moving:Boolean;
     private var _density:Number;
     private var _chain:Object;
     private var _chained:Boolean;
-
+    private var _walking:Boolean;
+    private var _jumping:Boolean;
+    private var _distanceX:Number;
+    private var _distanceY:Number;
+    private var _vFactor:Number ;
+    private var _startWalkSpeed:Number ;
 
     public function Hero()
     {
@@ -28,18 +32,26 @@ public class Hero extends Sprite
         addChild(quad);
 
         _density = Config.HERO_DENSITY;
-        moving = false;
+        _vFactor = Config.HERO_V_FACTOR;
+        _startWalkSpeed = Config.HERO_START_WALK_SPEED;
+        _speedX = 0;
+        _speedY = 0;
+
+        _jumping = true;
+        _walking = false;
 
         Gravity.add(this);
     }
 
     public function get speedY():Number
     {
+        trace('get speedY',_speedY)
         return _speedY;
     }
 
     public function set speedY(value:Number):void
     {
+        trace('set speedY',value)
         _speedY = value;
     }
 
@@ -53,21 +65,23 @@ public class Hero extends Sprite
         _direction = value;
     }
 
-    public function get moving():Boolean
+    public function get jumping():Boolean
     {
-        return _moving;
+        return _jumping;
     }
 
-    public function set moving(value:Boolean):void
+    public function set jumping(value:Boolean):void
     {
-        _moving = value;
+        _jumping = value;
 
-        if(moving)
-            chain = null;
+        if(jumping)
+        {
+            chained = false;
+        }
         else
         {
+            trace('set jumping', value)
             _direction = Config.FIXED;
-            speedX = 0;
             speedY = 0;
         }
 
@@ -91,11 +105,25 @@ public class Hero extends Sprite
     public function set chain(value:Object):void
     {
         _chain = value;
+        if (value == null)
+        {
+
+        }
+        else
+        {
+            trace('chain',value)
+            speedY = 0;
+            distanceX = this.x - _chain.x;
+            distanceY = this.y - _chain.y;
+            chained = true;
+            jumping = false;
+        }
     }
 
-    public function move(direction:int):void
+    public function move(direction:String):void
     {
-        if(moving)
+        trace("-----MOVE", direction, jumping)
+        if(jumping)
             return;
 
         speedY = - Config.HERO_Y_SPEED;
@@ -103,11 +131,11 @@ public class Hero extends Sprite
         switch(direction)
         {
             case Config.RIGHT_UP:
-                speedX = Config.HERO_X_SPEED;
+                speedX = Config.HERO_X_SPEED/3.1;
                 break;
 
             case Config.LEFT_UP:
-                speedX = -Config.HERO_X_SPEED;
+                speedX = -Config.HERO_X_SPEED/3.1;
                 break
 
             case Config.UP:
@@ -124,19 +152,34 @@ public class Hero extends Sprite
                 speedY = - Config.HERO_Y_SPEED/2;
                 break
 
-            case Config.TO_LEFT:
-                speedX = - Config.HERO_X_SPEED/10;
+            default:
+                    trace('default')
                 speedY = 0;
-                break
-
-            case Config.TO_RIGTH:
-                speedX = - Config.HERO_X_SPEED/10;
-                speedY = 0;
-                break
+                walk(direction);
+                return;
+                break;
         }
 
+        jumping = true;
+    }
 
-        moving = true;
+    public function walk(direction:String)
+    {
+        if(direction == Config.TO_RIGTH)
+        {
+            speedX = + Config.HERO_START_WALK_SPEED;
+        }
+        else if(direction == Config.TO_LEFT)
+        {
+            speedX = - Config.HERO_START_WALK_SPEED;
+        }
+        else
+        {
+            trace('wrong hero move direction:', direction);
+            return;
+        }
+
+        walking = true;
     }
 
     public function get speedX():Number
@@ -157,10 +200,67 @@ public class Hero extends Sprite
     public function set chained(value:Boolean):void
     {
         _chained = value;
-        if(chained)
+        if(!value)
         {
-
+            _chain = null;
+            //speedY = 0;
         }
+    }
+
+    public function get walking():Boolean
+    {
+        return _walking;
+    }
+
+    public function set walking(value:Boolean):void
+    {
+        _walking = value;
+        if(!value)
+        {
+            speedX = 0;
+        }
+    }
+
+
+
+    public function get distanceX():Number
+    {
+        return _distanceX;
+    }
+
+    public function set distanceX(value:Number):void
+    {
+        _distanceX = value;
+    }
+
+    public function get distanceY():Number
+    {
+        return _distanceY;
+    }
+
+    public function set distanceY(value:Number):void
+    {
+        _distanceY = value;
+    }
+
+    public function get vFactor():Number
+    {
+        return _vFactor;
+    }
+
+    public function set vFactor(value:Number):void
+    {
+        _vFactor = value;
+    }
+
+    public function get startWalkSpeed():Number
+    {
+        return _startWalkSpeed;
+    }
+
+    public function set startWalkSpeed(value:Number):void
+    {
+        _startWalkSpeed = value;
     }
 }
 }

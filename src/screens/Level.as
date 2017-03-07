@@ -78,7 +78,7 @@ public class Level extends Sprite
                 var y:int = object.globalToLocal(p).y;
                 Pool.putPoint(p);
 
-                return {plane:_planes[i],y:y};
+                return _planes[i];
             }
 
         }

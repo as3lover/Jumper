@@ -22,17 +22,19 @@ public class Config
     public static const HERO_HEIGTH:Number = 50;
     public static const NUM_OF_LEVELS:int = 4;
 
-    public static const RIGHT:int = 0 ;
-    public static const LEFT:int = 1 ;
-    public static const UP:int = 2 ;
-    public static const RIGHT_UP:int = 3;
-    public static const LEFT_UP:int = 4;
-    public static const TO_RIGTH:int = 4;
-    public static const TO_LEFT:int = 4;
+    public static const RIGHT:String = 'right' ;
+    public static const LEFT:String = 'left';
+    public static const UP:String = 'up' ;
+    public static const RIGHT_UP:String = 'rightUp';
+    public static const LEFT_UP:String = 'leftUp';
+    public static const TO_RIGTH:String = 'toRight';
+    public static const TO_LEFT:String = 'toLeft';
 
 
     public static const ACCEL:Number = 1000;
     public static const HERO_Y_SPEED:Number = 600;
-    public static const HERO_X_SPEED:Number = 150;
+    public static const HERO_X_SPEED:Number = 325;
+    public static const HERO_V_FACTOR:Number = 1.1;
+    public static const HERO_START_WALK_SPEED:Number = 15;
 }
 }

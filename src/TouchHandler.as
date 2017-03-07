@@ -3,95 +3,57 @@
  */
 package
 {
-import com.greensock.TweenLite;
 
 import flash.geom.Point;
 
-import starling.core.Starling;
-import starling.display.Image;
-
-import starling.display.Quad;
-import starling.display.Sprite;
 import starling.events.Event;
 import starling.events.Touch;
 import starling.events.TouchEvent;
 import starling.events.TouchPhase;
-import starling.utils.Color;
 import starling.utils.rad2deg;
 
-public class TouchTest extends Sprite
+public class TouchHandler
 {
-    var _box:Sprite;
     private var _startPoint:Point;
     private var _touchNum:int;
-
-    private const RIGHT_UP:String = 'RightUp';
-    private const LEFT_UP:String = 'LeftUp';
-    private const RIGHT:String = 'Right';
-    private const LEFT:String = 'Left';
-    private const UP:String = 'Up';
-    private const TO_LEFT:String = 'toLeft';
-    private const TO_RIGTH:String = 'toRight';
-
     private var _move:String;
     private var _moving:Boolean;
-    private var _distanse:Number;
+    private var _distance:Number;
     private var _degrees:Array;
-    private var _background:Image;
-    private var _speed:Number;
+    private var _touchArea;
+    private var _setMove:Function;
 
-    public function TouchTest(background:Image)
+    public function TouchHandler(touchArea, setMoveFunction)
     {
-        _background = background;
-        this.addEventListener(Event.ADDED_TO_STAGE, init);
-    }
-
-    private function init(event:Event):void
-    {
-        addChild(_background);
-
-        _box = new Sprite();
-        var quad:Quad = new Quad(50,50, Color.RED);
-        quad.x = -25;
-        quad.y = -50;
-        _box.addChild(quad);
-        addChild(_box);
-        //temp
-        _box.x = 400;
-        _box.y = 400;
-        trace(quad.getBounds(stage));
-        //
-        parent.addEventListener(TouchEvent.TOUCH, onTouch);
+        _touchArea = touchArea;
+        _setMove = setMoveFunction;
+        _touchArea.addEventListener(TouchEvent.TOUCH, onTouch);
     }
 
     private function onTouch(event:TouchEvent):void
     {
         var localPos:Point;
 
-        var touch:Touch = event.getTouch(this, TouchPhase.BEGAN);
+        var touch:Touch = event.getTouch(_touchArea, TouchPhase.BEGAN);
         if (touch)
         {
-            TweenLite.killTweensOf(_box);
             _moving = false;
-            _startPoint = touch.getLocation(this);
-            _box.x = 400;
-            _box.y = 400;
+            _startPoint = touch.getLocation(_touchArea);
             _touchNum = 0;
-            _speed = 0;
             _degrees = new Array();
-            _distanse = 0;
-            trace('start',_startPoint)
-            addEventListener(Event.ENTER_FRAME, onEnterFrame);
+            _distance = 0;
+            trace('start',_startPoint);
+            //_touchArea.addEventListener(Event.ENTER_FRAME, onEnterFrame);
         }
 
         if (_moving)
             return;
 
-        touch = event.getTouch(this, TouchPhase.MOVED);
+        touch = event.getTouch(_touchArea, TouchPhase.MOVED);
         if (touch)
         {
-            localPos = touch.getLocation(this);
-            _distanse += DistanceTwoPoints(_startPoint, localPos);
+            localPos = touch.getLocation(_touchArea);
+            _distance += DistanceTwoPoints(_startPoint, localPos);
             _degrees.push(getAngleFromPoints(_startPoint, localPos));
             _startPoint = localPos;
             trace('move',_startPoint)
@@ -101,15 +63,15 @@ public class TouchTest extends Sprite
             }
         }
 
-        touch = event.getTouch(this, TouchPhase.ENDED);
+        touch = event.getTouch(_touchArea, TouchPhase.ENDED);
         if (touch)
         {
-            removeEventListener(Event.ENTER_FRAME, onEnterFrame);
-            localPos = touch.getLocation(this);
+            _touchArea.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+            localPos = touch.getLocation(_touchArea);
             _degrees.push(getAngleFromPoints(_startPoint, localPos));
             trace('end',_startPoint)
 
-            if (_distanse < -10 && _distanse > +10)
+            if (_distance < -10 && _distance > +10)
             {
                 calcDegree(_degrees);
             }
@@ -208,53 +170,53 @@ public class TouchTest extends Sprite
     public function set move(value:String):void
     {
         _move = value;
-
-        var x:int = _box.x;
-        var y:int = _box.y;
-
-        switch (value)
-        {
-            case UP:
-                y -= 300;
-                break;
-
-            case LEFT_UP:
-                y -= 300;
-                x -= 200;
-                break;
-
-            case RIGHT_UP:
-                y -= 300;
-                x += 200;
-                break;
-
-            case LEFT:
-                x -= 200;
-                break;
-
-            case RIGHT:
-                x += 200;
-                break;
-
-            case TO_LEFT:
-                _speed -= .5;
-                break;
-
-            case TO_RIGTH:
-                _speed += .5;
-                break;
-        }
+       _setMove(value);
 
         if (value == TO_LEFT || value == TO_RIGTH)
         {
-            _box.x += _speed;
+
         }
         else
         {
-            removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+            _touchArea.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
             _moving = true;
-            TweenLite.to(_box, .5, {x: x, y: y});
         }
     }
+
+    private function get RIGHT_UP():String
+    {
+        return Config.RIGHT_UP;
+    }
+
+    private function get RIGHT():String
+    {
+        return Config.RIGHT;
+    }
+
+    private function get LEFT_UP():String
+    {
+        return Config.LEFT_UP;
+    }
+
+    private function get LEFT():String
+    {
+        return Config.LEFT;
+    }
+
+    private function get TO_LEFT():String
+    {
+        return Config.TO_LEFT;
+    }
+
+    private function get TO_RIGTH():String
+    {
+        return Config.TO_RIGTH;
+    }
+
+    private function get UP():String
+    {
+        return Config.UP;
+    }
+
 }
 }

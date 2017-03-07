@@ -10,12 +10,13 @@ import starling.display.Sprite;
 import starling.events.Event;
 import starling.events.KeyboardEvent;
 
+import utils.Gravity;
+
 public class GameArea extends Sprite
 {
     private var _hero:Hero;
     private var _levels:LevelHolder;
-    private var _xDistance:int;
-    private var _yDistance:int;
+    private var touchHandler:TouchHandler;
     public static var juggler:Juggler = new Juggler();
 
 
@@ -26,7 +27,7 @@ public class GameArea extends Sprite
 
         _hero = new Hero();
         _hero.x = 200;
-        _hero.y = 250;
+        _hero.y = 200;
         addChild(_hero);
 
         addEventListener(Event.ADDED_TO_STAGE, onAdd)
@@ -36,6 +37,7 @@ public class GameArea extends Sprite
     {
         removeEventListener(Event.ADDED_TO_STAGE, onAdd);
         stage.addEventListener(KeyboardEvent.KEY_DOWN, key);
+        touchHandler = new TouchHandler(parent, touch);
     }
 
     private function key(e:KeyboardEvent):void
@@ -57,32 +59,15 @@ public class GameArea extends Sprite
         }
     }
 
+    public function touch(dir:String):void
+    {
+        _hero.move(dir);
+    }
+
     public function advanceTime(time:Number):void
     {
-        var obj:Object;
-        if(_hero.moving)
-        {
-            if(_hero.direction == Config.DOWNWARD)
-            {
-                obj = _levels.cllision(_hero)
-                if(obj)
-                {
-                    _hero.moving = false;
-                    _hero.chain = obj.plane;
-                    //_hero.y = obj.y;
-
-                     _xDistance = _hero.x - _hero.chain.x;
-                    _yDistance = _hero.y - _hero.chain.y;
-                }
-            }
-        }
-        else if(_hero.chain)
-        {
-            _hero.x = _xDistance + _hero.chain.x;
-            _hero.y = _yDistance + _hero.chain.y;
-        }
-
         juggler.advanceTime(time);
+        Gravity.advanceTime(time, _levels);
     }
 }
 }
