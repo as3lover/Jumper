@@ -11,6 +11,7 @@ import starling.events.Event;
 import starling.events.KeyboardEvent;
 
 import utils.Gravity;
+import utils.TouchHandler;
 
 public class GameArea extends Sprite
 {

@@ -36,7 +36,8 @@ public class Gravity
             {
                 if(_obj.walking)
                 {
-                    _obj.speedX *= _obj.vFactor * time;
+                    trace('walking',_obj.speedX)
+                    _obj.speedX +=  _obj.speedX * _obj.vFactor * time;
                     _obj.distanceX += _obj.speedX * time;
                 }
 
@@ -46,6 +47,8 @@ public class Gravity
                 if(_obj.walking && !collide(_obj as DisplayObject, _obj.chain as DisplayObject))
                 {
                     _obj.chained = false;
+                    _obj.jumping = true;
+                    _obj.walking = false;
                 }
             }
             else if (_obj.jumping)

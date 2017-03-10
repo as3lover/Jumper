@@ -34,7 +34,7 @@ public class Config
     public static const ACCEL:Number = 1000;
     public static const HERO_Y_SPEED:Number = 600;
     public static const HERO_X_SPEED:Number = 325;
-    public static const HERO_V_FACTOR:Number = 1.1;
+    public static const HERO_V_FACTOR:Number = 2;
     public static const HERO_START_WALK_SPEED:Number = 15;
 }
 }

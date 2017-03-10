@@ -160,11 +160,15 @@ public class Hero extends Sprite
                 break;
         }
 
+        walking = false;
         jumping = true;
     }
 
     public function walk(direction:String)
     {
+        if(walking)
+                return;
+
         if(direction == Config.TO_RIGTH)
         {
             speedX = + Config.HERO_START_WALK_SPEED;
@@ -217,7 +221,7 @@ public class Hero extends Sprite
         _walking = value;
         if(!value)
         {
-            speedX = 0;
+            //speedX = 0;
         }
     }
 

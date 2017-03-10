@@ -1,7 +1,7 @@
 /**
  * Created by SalmanPC3 on 3/4/2017.
  */
-package
+package utils
 {
 
 import flash.geom.Point;
@@ -43,7 +43,7 @@ public class TouchHandler
             _degrees = new Array();
             _distance = 0;
             trace('start',_startPoint);
-            //_touchArea.addEventListener(Event.ENTER_FRAME, onEnterFrame);
+            _touchArea.addEventListener(Event.ENTER_FRAME, onEnterFrame);
         }
 
         if (_moving)
