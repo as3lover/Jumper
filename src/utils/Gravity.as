@@ -5,7 +5,7 @@ package utils
 {
 import flash.geom.Rectangle;
 
-import objects.Hero;
+import objects.oldHero;
 
 import starling.display.DisplayObject;
 

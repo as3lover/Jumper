@@ -9,6 +9,7 @@ import screens.GameArea;
 
 import starling.display.Image;
 import starling.display.Sprite;
+import starling.textures.Texture;
 import starling.events.Event;
 
 
@@ -30,7 +31,7 @@ public class Game extends Sprite
 
     private function onComplete(event:Event):void
     {
-        _background = new Image(assets.getTexture("background"));
+        _background = getImage("background");
         addChild(_background);
 
         _gameArea = new GameArea();
@@ -43,6 +44,16 @@ public class Game extends Sprite
     private function advanceTime(event:Event, passedTime:Number):void
     {
         _gameArea.advanceTime(passedTime);
+    }
+
+    public static function getImage(name:String):Image
+    {
+        return assets.image(name);
+    }
+
+    public static function getTexture(name:String):Texture
+    {
+        return assets.getTexture(name);
     }
 }
 }

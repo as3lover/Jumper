@@ -30,11 +30,54 @@ public class Config
     public static const TO_RIGTH:String = 'toRight';
     public static const TO_LEFT:String = 'toLeft';
 
+    public static const RANDOM:String = 'random';
+
 
     public static const ACCEL:Number = 1000;
     public static const HERO_Y_SPEED:Number = 600;
     public static const HERO_X_SPEED:Number = 325;
     public static const HERO_V_FACTOR:Number = 2;
     public static const HERO_START_WALK_SPEED:Number = 15;
+
+
+    public static const GRAVITY_X:Number = 0;
+    public static const GRAVITY_Y:Number = 600;
+
+    public static const HERO_RADIUS:int = 30;
+
+    public static const HERO_LEFT_UP_X_SPEED:int = - 110;
+    public static const HERO_LEFT_UP_Y_SPEED:int = 400;
+
+    public static const HERO_RIGHT_UP_X_SPEED:int = + 110;
+    public static const HERO_RIGHT_UP_Y_SPEED:int =  400;
+
+    public static const HERO_LEFT_X_SPEED:int = - 320;
+    public static const HERO_LEFT_Y_SPEED:int =  180;
+
+    public static const HERO_RIGHT_X_SPEED:int = + 320;
+    public static const HERO_RIGHT_Y_SPEED:int =  180;
+
+    public static const HERO_TO_LEFT_X_SPEED:int = - 200;
+    public static const HERO_TO_RIGHT_X_SPEED:int = + 200;
+
+    public static const HERO_UP_Y_SPEED:int = 400;
+
+    public static const HERO_JUMPING_SPEED:int = 1000;
+    public static const HERO_X_SPEED_JUMPING:int = 100;
+
+    public static const SPEED:Number = 2.5;
+    public static const STAGE_HEGHT:Number = 450;
+    public static const STAGE_WIDTH:int = 800;
+
+    public static const PLATFORM:String = 'platform';
+    public static const HERO:String = 'hero';
+    public static const PLATFORM_WIDTH:int = 150 ;
+    public static const PLATFORM_MARGIN:int = 25;
+    public static const PLATFORM_DISTANCE:int = 50;
+    public static const PLATFORM_NUMS:int = 7;
+
+
+
+
 }
 }

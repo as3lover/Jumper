@@ -42,7 +42,7 @@ public class TouchHandler
             _touchNum = 0;
             _degrees = new Array();
             _distance = 0;
-            trace('start',_startPoint);
+            //trace('start',_startPoint);
             _touchArea.addEventListener(Event.ENTER_FRAME, onEnterFrame);
         }
 
@@ -56,7 +56,7 @@ public class TouchHandler
             _distance += DistanceTwoPoints(_startPoint, localPos);
             _degrees.push(getAngleFromPoints(_startPoint, localPos));
             _startPoint = localPos;
-            trace('move',_startPoint)
+            //trace('move',_startPoint)
             if (_degrees.length > 4)
             {
                 calcDegree(_degrees);
@@ -69,7 +69,7 @@ public class TouchHandler
             _touchArea.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
             localPos = touch.getLocation(_touchArea);
             _degrees.push(getAngleFromPoints(_startPoint, localPos));
-            trace('end',_startPoint)
+            //trace('end',_startPoint)
 
             if (_distance < -10 && _distance > +10)
             {
