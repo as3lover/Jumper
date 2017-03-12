@@ -3,7 +3,11 @@
  */
 package objects
 {
+import Physics.Hero;
+
 import com.greensock.TweenLite;
+
+import screens.GameArea;
 
 import screens.GameArea;
 
@@ -49,11 +53,11 @@ public class PlatformGraphic extends Sprite
         }
     }
 
-    public function collid():void
+    public function collide():void
     {
         if(type == CHILI)
         {
-            Hero.chili();
+            GameArea(this.parent).jump();
             _chili.removeFromParent();
 
             var ps:PDParticleSystem = Game.assets.getParticle('chili');

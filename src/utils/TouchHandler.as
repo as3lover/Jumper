@@ -23,6 +23,8 @@ public class TouchHandler
     private var _touchArea;
     private var _setMove:Function;
 
+    private static var _status:String;
+
     public function TouchHandler(touchArea, setMoveFunction)
     {
         _touchArea = touchArea;
@@ -37,6 +39,7 @@ public class TouchHandler
         var touch:Touch = event.getTouch(_touchArea, TouchPhase.BEGAN);
         if (touch)
         {
+            set_status = TouchPhase.BEGAN;
             _moving = false;
             _startPoint = touch.getLocation(_touchArea);
             _touchNum = 0;
@@ -44,14 +47,19 @@ public class TouchHandler
             _distance = 0;
             //trace('start',_startPoint);
             _touchArea.addEventListener(Event.ENTER_FRAME, onEnterFrame);
+            return
         }
 
-        if (_moving)
-            return;
+
 
         touch = event.getTouch(_touchArea, TouchPhase.MOVED);
         if (touch)
         {
+            set_status = TouchPhase.MOVED;
+
+            if (_moving)
+                return;
+
             localPos = touch.getLocation(_touchArea);
             _distance += DistanceTwoPoints(_startPoint, localPos);
             _degrees.push(getAngleFromPoints(_startPoint, localPos));
@@ -61,11 +69,17 @@ public class TouchHandler
             {
                 calcDegree(_degrees);
             }
+            return;
         }
 
         touch = event.getTouch(_touchArea, TouchPhase.ENDED);
         if (touch)
         {
+
+            set_status = TouchPhase.ENDED;
+
+            if (_moving)
+                return;
             _touchArea.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
             localPos = touch.getLocation(_touchArea);
             _degrees.push(getAngleFromPoints(_startPoint, localPos));
@@ -85,7 +99,29 @@ public class TouchHandler
                         move = LEFT_UP;
                 }
             }
+
+            return;
         }
+
+        touch = event.getTouch(_touchArea, TouchPhase.HOVER);
+        if (touch)
+        {
+            set_status = TouchPhase.HOVER;
+            return;
+        }
+
+        touch = event.getTouch(_touchArea, TouchPhase.STATIONARY);
+        if (touch)
+        {
+            set_status = TouchPhase.STATIONARY;
+            return;
+        }
+    }
+
+    public function set set_status(a):void
+    {
+        _status = a;
+        //trace('TouchPhase:',a)
     }
 
 
@@ -216,6 +252,11 @@ public class TouchHandler
     private function get UP():String
     {
         return Config.UP;
+    }
+
+    public static function get status():String
+    {
+        return _status;
     }
 
 }

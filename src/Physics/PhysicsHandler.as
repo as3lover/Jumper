@@ -22,7 +22,7 @@ public class PhysicsHandler
     private static var _space:Space;
     private var _gravity:Vec2 ;
     private var _oneWayType:CbType;
-    private var _hero:HeroBody;
+    private var _hero:Hero;
     private var _bodies:Array ;
     private var _length:int;
 
@@ -42,8 +42,12 @@ public class PhysicsHandler
                 true
         ));
 
-        _hero = new HeroBody(_space);
-       addBody(_hero);
+    }
+
+    public function addHero(hero:Hero)
+    {
+        _hero = hero;
+        addBody(_hero);
     }
 
     private function addBody(body:PhysicObject):void
@@ -54,32 +58,33 @@ public class PhysicsHandler
 
     private function oneWayHandler(cb:PreCallback):PreFlag
     {
-
         var colArb:CollisionArbiter = cb.arbiter.collisionArbiter;
 
         if ((colArb.normal.y > 0) != cb.swapped) {
             return PreFlag.IGNORE;
         }
         else {
-            cb.int1.userData.graphic.collid();
+            cb.int1.userData.collide();
+            cb.int2.userData.collide();
             return PreFlag.ACCEPT;
         }
     }
 
-    public function get hero():HeroBody
+    public function get hero():Hero
     {
         return _hero;
     }
 
-    public function addFloor(x:int, y:int, width:int, height:int, type:String, handler:Function = null):Platform
+    public function addFloor(x:int, y:int, width:int, height:int, type:String, onUpdateFunction:Function = null):Platform
     {
         var platform:Platform = Pool.getPlatform();
-        //var platform:Platform = null;
         if(platform == null)
         {
-            platform = new Platform(x, y, width, height, _space,BodyType.KINEMATIC, _oneWayType, handler);
+            platform = new Platform(x, y, width, height, _space,BodyType.KINEMATIC, _oneWayType);
             platform.graphic = new PlatformGraphic();
             platform.type = type;
+            platform.addUpdateFunction(onUpdateFunction);
+            platform.collide = platform.graphic.collide;
         }
         else
         {
@@ -97,21 +102,17 @@ public class PhysicsHandler
 
     public function advanceTime(time:Number):void
     {
-        time *= Config.SPEED;
+        time *= Config.SPEED_SCLAE;
         _space.step(time);
 
         for (var i:int = 0; i<_length; i++)
         {
-            PhysicObject(_bodies[i]).updateGraphic();
-            if(PhysicObject(_bodies[i]).handler)
-            {
-                PhysicObject(_bodies[i]).handler(PhysicObject(_bodies[i]));
-            }
+            PhysicObject(_bodies[i]).update();
         }
     }
 
 
-    public static function get space():Space
+    public function get space():Space
     {
         return _space;
     }

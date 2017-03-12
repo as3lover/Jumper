@@ -22,5 +22,14 @@ public class EmpeddedAssets
 
     [Embed(source = "../assets/particles/particleTexture.png")]
     public static const particleTexture:Class;
+
+    [Embed(source="../assets/textures/1x/wiki_red.xml", mimeType="application/octet-stream")]
+    public static const wiki_red_Atlas:Class;
+
+    [Embed(source = "../assets/textures/1x/wiki_red.png")]
+    public static const wiki_red:Class;
+
+    [Embed(source = "../assets/textures/1x/balloon.png")]
+    public static const balloon:Class;
 }
 }

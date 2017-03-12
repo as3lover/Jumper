@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="wiki_red.png">
+	<!-- Created with Adobe Animate version 16.0.0.112 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="wiki_red_0" x="0" y="0" width="166" height="154"/>
+	<SubTexture name="wiki_red_1" x="166" y="0" width="166" height="154"/>
+	<SubTexture name="wiki_red_2" x="332" y="0" width="166" height="154"/>
+	<SubTexture name="wiki_red_3" x="0" y="154" width="166" height="154"/>
+	<SubTexture name="wiki_red_4" x="166" y="154" width="166" height="154"/>
+	<SubTexture name="wiki_red_5" x="332" y="154" width="166" height="154"/>
+	<SubTexture name="wiki_red_6" x="0" y="308" width="166" height="154"/>
+	<SubTexture name="wiki_red_7" x="166" y="308" width="166" height="154"/>
+	<SubTexture name="wiki_red_8" x="332" y="308" width="166" height="154"/>
+	<SubTexture name="wiki_red_9" x="0" y="462" width="166" height="154"/>
+</TextureAtlas>

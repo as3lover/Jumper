@@ -6,7 +6,10 @@ package
 import flash.system.System;
 import flash.utils.setTimeout;
 
+import starling.core.Starling;
+
 import starling.display.Image;
+import starling.display.MovieClip;
 import starling.events.Event;
 import starling.extensions.PDParticleSystem;
 import starling.textures.Texture;
@@ -17,6 +20,7 @@ public class Assets extends EventDispatcher
 {
     private var _asset:AssetManager;
     private var _particles:Object;
+    public var _bird:MovieClip;
 
     public function Assets()
     {
@@ -47,30 +51,36 @@ public class Assets extends EventDispatcher
         var texture:Texture = getTexture('particleTexture');
         var ps:PDParticleSystem = new PDParticleSystem(xml, texture);
         _particles.chili = ps;
+
+        addBird();
+    }
+
+    private function addBird():void
+    {
+        var birdTextures:Vector.<Texture> = _asset.getTextures("wiki_red_");
+        _bird = new MovieClip(birdTextures);
+        Starling.juggler.add(_bird);
+        _bird.stop();
+
     }
 
     public function getTexture(name:String):Texture
     {
-        trace('getTexture',name);
         return _asset.getTexture(name);
     }
 
     public function image(name:String):Image
     {
-        trace('image',name);
         return new Image(getTexture(name));
     }
 
     public function getXML(name:String):XML
     {
-        trace('getXML',name);
         return _asset.getXml(name);
     }
 
     public function getParticle(name:String):PDParticleSystem
     {
-        trace('getParticle',name);
-        trace(_particles.chili);
         return _particles[name];
     }
 }

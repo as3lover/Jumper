@@ -15,7 +15,7 @@ public class Platform extends PhysicObject
 
     private static var _length:int;
 
-    public function Platform(x:int, y:int, width:int, height:int, space:Space ,bodyType:BodyType, cbType:CbType = null, handler:Function = null)
+    public function Platform(x:int, y:int, width:int, height:int, space:Space ,bodyType:BodyType, cbType:CbType = null)
     {
         super(bodyType);
         shape = new Polygon(Polygon.rect(5,0,width-10,height));
@@ -24,7 +24,6 @@ public class Platform extends PhysicObject
         this.cbTypes = cbType;
         this.space = space;
         originalSpace = space;
-        this.handler = handler;
 
         _length++;
     }

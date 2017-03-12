@@ -39,6 +39,8 @@ public class Game extends Sprite
 
         setTimeout(startGame,300)
         function startGame(){addEventListener(Event.ENTER_FRAME, advanceTime);}
+
+        addChild(assets._bird);
     }
 
     private function advanceTime(event:Event, passedTime:Number):void

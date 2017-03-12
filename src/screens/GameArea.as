@@ -4,13 +4,14 @@
 package screens
 {
 
+import Physics.Hero;
 import Physics.Platform;
 import Physics.PlatformSorter;
 
-import objects.Hero;
+import flash.trace.Trace;
+
 
 import starling.animation.Juggler;
-import starling.display.Image;
 import starling.display.Sprite;
 import starling.events.Event;
 
@@ -52,11 +53,9 @@ public class GameArea extends Sprite
         touchHandler = new TouchHandler(parent, touch);
 
         physic = new PhysicsHandler();
-
-        var heroGraphic:HeroGraphic = new HeroGraphic();
-        _hero = new Hero(physic.hero, heroGraphic);
+        _hero = new Hero(physic.space, this);
         _hero.y = Config.STAGE_HEGHT - 100;
-        addChild(_hero.graphic);
+        physic.addHero(_hero);
 
         platSort.setLevel();
         platSort.setLevel();
@@ -75,17 +74,14 @@ public class GameArea extends Sprite
         }
     }
 
-
-
-
     private function floor(x:int, y:int):void
     {
         _lastY = y;
-        var platform:Platform = physic.addFloor(x, y, Config.PLATFORM_WIDTH, 1, Config.PLATFORM, platformHandler);
+        var platform:Platform = physic.addFloor(x, y, Config.PLATFORM_WIDTH, 1, Config.PLATFORM_TYPE, platformHandler);
         addChildAt(platform.graphic,0);
     }
 
-    public function touch(dir:String):void
+    public static function touch(dir:String):void
     {
        _hero.move(dir);
     }
@@ -118,16 +114,11 @@ public class GameArea extends Sprite
 
     function moveArea()
     {
-        if(_hero.jumping)
-        {
-            _hero.speedY = 0;
-
-        }
-
         if(_hero.y + y < Config.STAGE_HEGHT/2.5)
         {
             var dis:Number = y - (Config.STAGE_HEGHT/2.5 - _hero.y)
-            if(_hero.jumping && _hero.jumps < 150)
+
+            if(_hero.status == _hero.STATUS.JUMPING && _hero.jumps < _hero.JUMPING_LEVELS-30)
             {
                 y -= dis;
             }
@@ -135,6 +126,8 @@ public class GameArea extends Sprite
                 y -= dis;
             else
                 y -= dis/10;
+
+
 
             if (_lastY + y > Config.STAGE_HEGHT/5)
                 platSort.setLevel();
@@ -144,6 +137,20 @@ public class GameArea extends Sprite
             _hero.y = Config.STAGE_HEGHT/2 - y;
             _hero.x = Config.STAGE_WIDTH/2 - x;
         }
+
+    }
+
+    private function Tracee():void
+    {
+        if(_hero.isJumping)
+        {
+            trace('jumping',int(_hero.y), int(y),String(int(y - (Config.STAGE_HEGHT/2.5 - _hero.y))));
+        }
+        else
+        {
+            trace(int(_hero.y), int(y),String(int(y - (Config.STAGE_HEGHT/2.5 - _hero.y))));
+        }
+        trace('.............')
     }
 
     private function platformHandler(body:Platform):void
@@ -153,6 +160,11 @@ public class GameArea extends Sprite
             body.dispose();
             physic.remove(body);
         }
+    }
+
+    public function jump()
+    {
+        _hero.status = _hero.STATUS.JUMPING;
     }
 }
 }

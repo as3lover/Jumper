@@ -4,11 +4,14 @@ import Physics.PhysicsHandler;
 
 import flash.display.Sprite;
 import flash.events.Event;
+import flash.events.KeyboardEvent;
 import flash.geom.Rectangle;
 import flash.utils.setTimeout;
 
 import nape.util.BitmapDebug;
 import nape.util.Debug;
+
+import screens.GameArea;
 
 import starling.core.Starling;
 import starling.events.Event;
@@ -55,6 +58,25 @@ public class Main extends Sprite {
 
         setTimeout(stage.addEventListener, 3000, flash.events.Event.ENTER_FRAME, ef);
         addChildAt(_debug.display,0);
+        stage.addEventListener(KeyboardEvent.KEY_DOWN, key)
+    }
+
+    private function key(e:KeyboardEvent):void
+    {
+        switch(e.keyCode)
+        {
+            case 37:
+                GameArea.touch(Config.LEFT_UP);
+                break;
+
+            case 38:
+                GameArea.touch(Config.UP);
+                break;
+
+            case 39:
+                GameArea.touch(Config.RIGHT_UP);
+                break;
+        }
     }
 
     private function ef(event:flash.events.Event):void
