@@ -11,10 +11,10 @@
             <entry library-id="8faea7a1-251a-4f27-9807-a1508ed81073">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="c227bd57-6b1c-4d87-9924-3ed91a52e5d7">
+            <entry library-id="7680c528-a5ae-452e-9b24-8d4af219e145">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="7680c528-a5ae-452e-9b24-8d4af219e145">
+            <entry library-id="4a3b1ccc-3e84-4cea-bc7c-b473cf294394">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -57,9 +57,9 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="c227bd57-6b1c-4d87-9924-3ed91a52e5d7" />
+        <properties id="7680c528-a5ae-452e-9b24-8d4af219e145" />
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../test nape/nape-debug.swc!/" />
+          <root url="file://$MODULE_DIR$/../Starling Extensions/Starling-Extension-Particle-System/src" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -67,9 +67,9 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="7680c528-a5ae-452e-9b24-8d4af219e145" />
+        <properties id="4a3b1ccc-3e84-4cea-bc7c-b473cf294394" />
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../Starling extensions/Starling-Extension-Particle-System/src" />
+          <root url="jar://$MODULE_DIR$/../Nape/nape-release.swc!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

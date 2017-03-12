@@ -15,6 +15,9 @@ import starling.display.Sprite;
 import starling.events.Event;
 
 import Physics.PhysicsHandler;
+
+import starling.text.TextField;
+
 import utils.TouchHandler;
 
 public class GameArea extends Sprite
@@ -25,6 +28,7 @@ public class GameArea extends Sprite
     public static var juggler:Juggler = new Juggler();
     private var _index:int;
     private var _lastY:int;
+    private var _level:TextField;
 
     private var platSort:PlatformSorter;
 
@@ -37,6 +41,11 @@ public class GameArea extends Sprite
     private function onAdd(event:Event):void
     {
         removeEventListener(Event.ADDED_TO_STAGE, onAdd);
+
+        _level = new TextField(100,20);
+        _level.y = Config.STAGE_HEGHT - _level.height;
+        parent.addChild(_level)
+
 
         platSort = new PlatformSorter(SortPlatforms);
 
@@ -58,6 +67,7 @@ public class GameArea extends Sprite
 
     private function SortPlatforms(list:Array, level:int)
     {
+        _level.text = 'level: ' + String(level-4);
         level = Config.STAGE_HEGHT - level * (Config.STAGE_HEGHT/4);
         for(var i:int=0; i<list.length ; i++)
         {

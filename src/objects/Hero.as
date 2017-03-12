@@ -74,6 +74,8 @@ public class Hero
             {
                 _jumping = false;
                 graphic.parent.parent.x = graphic.parent.parent.y = 0;
+                trace(_hero.shape.material.dynamicFriction);
+                _hero.shape.material.dynamicFriction /= 2;
             }
             else if(JUMP == 149)
             {

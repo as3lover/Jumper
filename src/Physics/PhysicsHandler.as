@@ -43,7 +43,6 @@ public class PhysicsHandler
         ));
 
         _hero = new HeroBody(_space);
-
        addBody(_hero);
     }
 
@@ -53,7 +52,7 @@ public class PhysicsHandler
         _length++;
     }
 
-        private function oneWayHandler(cb:PreCallback):PreFlag
+    private function oneWayHandler(cb:PreCallback):PreFlag
     {
 
         var colArb:CollisionArbiter = cb.arbiter.collisionArbiter;
